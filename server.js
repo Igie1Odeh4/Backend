@@ -1,36 +1,48 @@
-/**
- * Root server entrypoint
- *
- * Purpose:
- * - Some deployment platforms (Render, Heroku, etc.) run `node server.js` from
- *   the repository root. This file forwards to the actual server
- *   implementation located at `Backend/server.js`.
- *
- * Behavior:
- * - Resolves the `Backend/server.js` path relative to this file.
- * - If the target file is missing, prints a helpful error and exits with code 1.
- * - Otherwise requires the target so the real server starts normally.
- *
- * Usage:
- * - Locally: `node server.js`
- * - Platforms: leave as-is; they will invoke this file automatically.
- *
- * Notes:
- * - Keep the application code inside `Backend/server.js`.
- */
+const express = require('express');
+const cors = require('cors');
+const dotenv = require('dotenv');
 
-const path = require("path");
-const fs = require("fs");
+const connectDB = require('./config/db');
+const authRoutes = require('./routes/authRoutes');
+const testRoutes = require('./routes/testRoutes');
+const courseRoutes = require('./routes/courseRoutes');
+const lessonRoutes = require('./routes/lessonRoutes');
+const progressRoutes = require('./routes/progressRoutes');
+const analyticsRoutes = require('./routes/analyticsRoutes');
 
-const target = path.join(__dirname, "Backend", "server.js");
 
-if (!fs.existsSync(target)) {
-  console.error(`ERROR: Entrypoint not found: ${target}`);
-  console.error(
-    "Ensure the repository contains Backend/server.js or update this file to point to the correct entry.",
-  );
-  process.exit(1);
-}
+dotenv.config();
 
-console.log(`Loading application from ${target}`);
-require(target);
+const app = express();
+
+app.use(cors());
+app.use(express.json());
+
+app.get('/', (req, res) => {
+  res.json({ message: 'Backend API is running' });
+});
+
+app.use('/api/auth', authRoutes);
+app.use('/api/test', testRoutes);
+app.use('/api/courses', courseRoutes);
+app.use('/api/lessons', lessonRoutes);
+app.use('/api/progress', progressRoutes);
+app.use('/api/analytics', analyticsRoutes);
+
+app.use((err, req, res, next) => {
+  const statusCode = err.statusCode || 500;
+  res.status(statusCode).json({
+    message: err.message || 'Server error'
+  });
+});
+
+const PORT = process.env.PORT || 5050;
+
+const startServer = async () => {
+  await connectDB();
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
+};
+
+startServer();
