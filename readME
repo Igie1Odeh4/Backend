@@ -44,16 +44,58 @@ npx nodemon server.js
 
 ## API Overview
 
-Key route groups (see `routes/` folder):
+Base URL for Postman:
 
-- `POST /api/auth/...` — authentication (login, register, token)
-- `GET/POST /api/courses/...` — course management
-- `GET/POST /api/lessons/...` — lesson resources
-- `GET/POST /api/progress/...` — student progress tracking
-- `GET/POST /api/notifications/...` — notifications
-- `GET /api/dashboard/...` — dashboard endpoints
-- `GET /api/analytics/...` — analytics endpoints
-- `GET /api/test/...` — test routes
+- `https://backend-fbag.onrender.com`
+
+Protected routes require a Bearer token in the `Authorization` header.
+
+### Auth
+
+- `POST https://backend-fbag.onrender.com/api/auth/register`
+- `POST https://backend-fbag.onrender.com/api/auth/login`
+
+### Test
+
+- `GET https://backend-fbag.onrender.com/api/test/profile`
+- `GET https://backend-fbag.onrender.com/api/test/admin`
+
+### Courses
+
+- `POST https://backend-fbag.onrender.com/api/courses`
+- `GET https://backend-fbag.onrender.com/api/courses`
+- `GET https://backend-fbag.onrender.com/api/courses/:id`
+- `PUT https://backend-fbag.onrender.com/api/courses/:id`
+- `DELETE https://backend-fbag.onrender.com/api/courses/:id`
+
+### Lessons
+
+- `POST https://backend-fbag.onrender.com/api/lessons`
+- `GET https://backend-fbag.onrender.com/api/lessons`
+- `GET https://backend-fbag.onrender.com/api/lessons/:id`
+- `PUT https://backend-fbag.onrender.com/api/lessons/:id`
+- `DELETE https://backend-fbag.onrender.com/api/lessons/:id`
+
+### Progress
+
+- `POST https://backend-fbag.onrender.com/api/progress`
+- `GET https://backend-fbag.onrender.com/api/progress/student/:studentId`
+- `GET https://backend-fbag.onrender.com/api/progress/course/:courseId`
+
+### Analytics
+
+- `GET https://backend-fbag.onrender.com/api/analytics`
+
+### Dashboard
+
+- `GET https://backend-fbag.onrender.com/api/dashboard/summary`
+
+### Notifications
+
+- `GET https://backend-fbag.onrender.com/api/notifications`
+- `POST https://backend-fbag.onrender.com/api/notifications`
+- `PATCH https://backend-fbag.onrender.com/api/notifications/:id/read`
+- `POST https://backend-fbag.onrender.com/api/notifications/bulk-nudge`
 
 See the route files under `routes/` for full details and parameter expectations.
 
