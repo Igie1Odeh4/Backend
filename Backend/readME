@@ -1,0 +1,82 @@
+# Backend API
+
+This repository contains the backend server for the learning platform project. It provides REST API endpoints for authentication, courses, lessons, progress tracking, notifications, analytics, and dashboard data.
+
+## Tech stack
+
+- Node.js
+- Express
+- MongoDB (Mongoose)
+
+## Prerequisites
+
+- Node.js (v16+ recommended)
+- npm (or yarn)
+- MongoDB instance (local or cloud)
+
+## Environment
+
+Create a `.env` file at the project root with at minimum the following variables:
+
+- `PORT` — port to run the server (default: 3000)
+- `MONGODB_URI` — MongoDB connection string
+- `JWT_SECRET` — secret used to sign JWTs
+
+## Install
+
+```bash
+npm install
+```
+
+## Run
+
+Start the server:
+
+```bash
+node server.js
+```
+
+For development with automatic reload (if you use `nodemon`):
+
+```bash
+npx nodemon server.js
+```
+
+## API Overview
+
+Key route groups (see `routes/` folder):
+
+- `POST /api/auth/...` — authentication (login, register, token)
+- `GET/POST /api/courses/...` — course management
+- `GET/POST /api/lessons/...` — lesson resources
+- `GET/POST /api/progress/...` — student progress tracking
+- `GET/POST /api/notifications/...` — notifications
+- `GET /api/dashboard/...` — dashboard endpoints
+- `GET /api/analytics/...` — analytics endpoints
+- `GET /api/test/...` — test routes
+
+See the route files under `routes/` for full details and parameter expectations.
+
+## Project Structure
+
+- `config/` — DB and configuration
+- `controllers/` — request handlers
+- `middleware/` — Express middleware (auth, validation)
+- `models/` — Mongoose models
+- `routes/` — Express routers
+- `services/` — business logic / domain services
+- `utils/` — helper utilities
+
+## Notes for Developers
+
+- Keep controller logic thin; put business rules in `services/`.
+- Use the `middleware/authMiddleware.js` for protected routes.
+- Add environment-specific config to `config/` or use `process.env`.
+
+## Contributing
+
+Feel free to open issues or submit pull requests. Follow the existing code style and add tests where appropriate.
+
+## License
+
+Specify a license for this project (e.g., MIT) in a `LICENSE` file.
