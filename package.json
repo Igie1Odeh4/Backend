@@ -7,9 +7,10 @@
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js",
-    "build:frontend": "cd frontend/PROJECT/PROJECT && npm run build",
+    "build:frontend": "npm install --prefix frontend/PROJECT/PROJECT && npm run build --prefix frontend/PROJECT/PROJECT",
     "serve": "npm run build:frontend && npm run start"
   },
+  "postinstall": "npm run build:frontend",
   "keywords": [],
   "author": "",
   "license": "ISC",
