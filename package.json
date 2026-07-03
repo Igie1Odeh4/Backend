@@ -6,7 +6,9 @@
   "type": "commonjs",
   "scripts": {
     "start": "node server.js",
-    "dev": "nodemon server.js"
+    "dev": "nodemon server.js",
+    "build:frontend": "cd frontend/PROJECT/PROJECT && npm run build",
+    "serve": "npm run build:frontend && npm run start"
   },
   "keywords": [],
   "author": "",
