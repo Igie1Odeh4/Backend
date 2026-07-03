@@ -9,7 +9,7 @@
     "prestart": "npm run build:frontend",
     "build": "npm run build:frontend",
     "dev": "nodemon server.js",
-    "build:frontend": "cd frontend/PROJECT/PROJECT && npm install && npm run build",
+    "build:frontend": "cd PROJECT && npm install && npm run build",
     "serve": "npm run build:frontend && npm run start"
   },
   "postinstall": "npm run build:frontend",
