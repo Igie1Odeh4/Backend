@@ -19,6 +19,7 @@ const app = express();
 const frontendBuildPath = path.join(__dirname, "frontend", "PROJECT", "dist");
 
 app.use(cors());
+
 app.use(express.json());
 
 app.use("/api/auth", authRoutes);
