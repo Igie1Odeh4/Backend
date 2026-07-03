@@ -16,13 +16,7 @@ const notificationRoutes = require("./routes/notificationRoutes");
 dotenv.config();
 
 const app = express();
-const frontendBuildPath = path.join(
-  __dirname,
-  "frontend",
-  "PROJECT",
-  "PROJECT",
-  "dist",
-);
+const frontendBuildPath = path.join(__dirname, "frontend", "PROJECT", "dist");
 
 app.use(cors());
 app.use(express.json());
